@@ -15,9 +15,11 @@ public class InputManager : SingleInstance<InputManager>
     private InputActionMap _currentMap;
     private InputAction _moveAction;
     private InputAction _interactAction;
+    private InputAction _pauseAction;
 
     public Vector2 Move => move;
     public InputAction Interact => _interactAction;
+    public InputAction Pause => _pauseAction;
 
     protected override void Awake()
     {
@@ -27,6 +29,7 @@ public class InputManager : SingleInstance<InputManager>
 
         _moveAction = _currentMap.FindAction("Movement");
         _interactAction = _currentMap.FindAction("Interact");
+        _pauseAction = _currentMap.FindAction("Pause");
 
         _moveAction.performed += OnMovement;
         _moveAction.canceled += OnMovement;
