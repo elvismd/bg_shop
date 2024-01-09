@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private InputManager input;
     [SerializeField] private Rigidbody2D rbody;
     [SerializeField] private float movementSpeed = 10f;
 
@@ -15,6 +14,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rbody.velocity = input.Move * movementSpeed;
+        rbody.velocity = InputManager.Instance.Move * movementSpeed;
     }
 }

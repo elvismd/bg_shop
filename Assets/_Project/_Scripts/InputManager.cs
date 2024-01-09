@@ -5,24 +5,32 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-public class InputManager : MonoBehaviour
+public class InputManager : SingleInstance<InputManager>
 {
     [SerializeField]
     private PlayerInput _input;
 
     private Vector2 move;
+
     private InputActionMap _currentMap;
     private InputAction _moveAction;
+    private InputAction _interactAction;
 
     public Vector2 Move => move;
+    public InputAction Interact => _interactAction;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _currentMap = _input.currentActionMap;
 
         _moveAction = _currentMap.FindAction("Movement");
+        _interactAction = _currentMap.FindAction("Interact");
+
         _moveAction.performed += OnMovement;
         _moveAction.canceled += OnMovement;
+
     }
 
     private void OnEnable()
@@ -38,6 +46,5 @@ public class InputManager : MonoBehaviour
     private void OnMovement(InputAction.CallbackContext ctx)
     {
         move = ctx.ReadValue<Vector2>();
-        Debug.Log("eee");
     }
 }
