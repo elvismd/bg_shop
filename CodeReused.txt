@@ -1,0 +1,3 @@
+ ReadOnlyAttribute - I had that ready from other projects
+ 
+ The rest of the code I wrote it myself through the 48hrs.
