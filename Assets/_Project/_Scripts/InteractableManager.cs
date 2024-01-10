@@ -23,7 +23,7 @@ public class InteractableManager : SingleInstance<InteractableManager>
 
     void Update()
     {
-        if (interacting) return;
+        if (interacting || GameManager.Instance.IsPaused) return;
 
         highlightedInteractable = null;
         if (interactables.Count > 0)

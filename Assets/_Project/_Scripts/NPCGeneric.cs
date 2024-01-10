@@ -11,6 +11,11 @@ public class NPCGeneric : MonoBehaviour
         for (int i = 0; i < conversation.Length; i++)
         {
             DialogueSystem.Instance.Play(conversation[i]);
+
+            conversation[i].onEnd = () =>
+            {
+                InteractableManager.Instance.EndCurrentInteraction();
+            };
         }
     }
 }

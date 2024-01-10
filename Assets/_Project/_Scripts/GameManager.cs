@@ -40,6 +40,8 @@ public class GameManager : SingleInstance<GameManager>
         paused = true;
 
         OnTogglePause?.Invoke(paused);
+
+        ResetCursorSprite();
     }
 
     public void UnPause()
