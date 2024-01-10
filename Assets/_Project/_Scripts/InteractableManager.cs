@@ -40,22 +40,22 @@ public class InteractableManager : SingleInstance<InteractableManager>
 
         if(highlightedInteractable != null)
         {
-            World.Instance.SetCursorSprite(interactionCursor);
+            GameManager.Instance.SetCursorSprite(interactionCursor);
 
             if (InputManager.Instance.Interact.WasPressedThisFrame())
             {
                 highlightedInteractable.OnInteract.Invoke();
                 Debug.Log("Started Interaction");
 
-                World.Instance.OnInteractionStart.Invoke();
+                GameManager.Instance.OnInteractionStart.Invoke();
 
-                World.Instance.ResetCursorSprite();
+                GameManager.Instance.ResetCursorSprite();
                 interacting = true;
             }
         }
         else
         {
-            World.Instance.ResetCursorSprite();
+            GameManager.Instance.ResetCursorSprite();
         }
     }
 
@@ -63,7 +63,7 @@ public class InteractableManager : SingleInstance<InteractableManager>
     {
         interacting = false;
 
-        World.Instance.OnInteractionEnd.Invoke();
+        GameManager.Instance.OnInteractionEnd.Invoke();
     }
 
     public void AddInteractable(Interactable interactable) => interactables.Add(interactable);

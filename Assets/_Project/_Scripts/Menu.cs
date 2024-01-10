@@ -24,18 +24,18 @@ public class Menu : MonoBehaviour
 
     public void TogglePause()
     {
-        if (!World.Instance.IsPaused)
+        if (!GameManager.Instance.IsPaused)
         {
             rectTransform.anchoredPosition = Vector3.zero;
 
-            World.Instance.Pause();
+            GameManager.Instance.Pause();
             firstMenuControl.Open();
         }
-        else if (World.Instance.IsPaused)
+        else if (GameManager.Instance.IsPaused)
         {
             rectTransform.anchoredPosition = Vector3.right * 6000;
 
-            World.Instance.UnPause();
+            GameManager.Instance.UnPause();
             MenuControl.Current?.Close();
         }
     }

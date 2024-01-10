@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class World : SingleInstance<World>
+public class GameManager : SingleInstance<GameManager>
 {
     [SerializeField] private Texture2D initialCursorSprite;
 

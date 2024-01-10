@@ -17,8 +17,8 @@ public class PlayerController : SingleInstance<PlayerController>
 
     void Start()
     {
-        World.Instance.OnInteractionStart += () => enabled = false;
-        World.Instance.OnInteractionEnd += () => enabled = true;
+        GameManager.Instance.OnInteractionStart += () => enabled = false;
+        GameManager.Instance.OnInteractionEnd += () => enabled = true;
     }
 
     private void OnEnable()

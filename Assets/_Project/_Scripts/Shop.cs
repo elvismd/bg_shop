@@ -31,7 +31,7 @@ public class Shop : MonoBehaviour
                 });
             }
         }
-        World.Instance.OnTogglePause += OnPause;
+        GameManager.Instance.OnTogglePause += OnPause;
     }
 
     private void Update()

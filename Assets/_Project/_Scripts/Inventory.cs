@@ -30,7 +30,19 @@ public class Inventory : SingleInstance<Inventory>
     void Start()
     {
         RefreshUI();
+
+        GameManager.Instance.OnTogglePause += OnPause;
     }
+
+    void OnPause(bool pause)
+    {
+        //if (!pause)
+        {
+            if(draggedItem != null)
+                ReleaseItem();
+        }
+    }
+
     void Update()
     {
         currencyLabel.text = currencyAmount.ToString();
