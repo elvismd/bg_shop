@@ -1,3 +1,5 @@
+![banner](img.png)
+
 # Stardew Valley-like topdown Prototype
 A small 2D top-down simulation prototype including a functional clothing shop. You can buy/sell cloth items and equip/unequip them.
 As well as collect items from the world and interact with NPCs.
