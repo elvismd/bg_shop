@@ -7,6 +7,12 @@ As well as collect items from the world and interact with NPCs.
 ## Documentation
 You can find the document explaining the development process [here](https://github.com/elvismd/bg_shop/blob/main/Blue%20Gravity%20Interview%20Task%20-%20Elvis%20Medeiros.pdf).
 
+## How to play
+- WASD for Movement
+- Mouse LB + Cursor to interact with NPCs
+- Drag and drop items with your cursor from the inventory to the slots around the player 
+- Just click on the items of the shop list to buy them
+
 ## Assets used:
 - https://paperhatlizard.itch.io/cryos-mini-gui
 - https://leo-red.itch.io/lucid-icon-pack
