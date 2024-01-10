@@ -4,35 +4,51 @@ using UnityEngine;
 
 public class Shopkeeper : MonoBehaviour
 {
-    [SerializeField] private MenuControl shopMenu;
+    [SerializeField] private Shop shop;
 
     [SerializeField] private Dialogue welcomeDialogue;
     [SerializeField] private Dialogue offerShopDialogue;
+
+    bool firstTime = true;
 
     private void Start()
     {
         offerShopDialogue.onClickYes = () =>
         {
-            shopMenu.Open();
+            shop.SetupShop();
         };
 
         offerShopDialogue.onClickNo = () =>
         {
-            InteractableManager.Instance.EndCurrentInteraction();
+            EndInteraction();
         };
 
         offerShopDialogue.onEnd = () =>
         {
-            if(shopMenu != MenuControl.Current) //Did not opened shop
-                InteractableManager.Instance.EndCurrentInteraction();
+            if (shop.MenuControl != MenuControl.Current) //Did not opened shop
+                EndInteraction();
         };
     }
 
 
     public void StartInteraction()
     {
-        // Can call Play one after another, it enqueue each dialogue
-        DialogueSystem.Instance.Play(welcomeDialogue);
-        DialogueSystem.Instance.Play(offerShopDialogue);
+        if (firstTime)
+        {
+            // Can call Play one after another, it enqueue each dialogue
+            DialogueSystem.Instance.Play(welcomeDialogue);
+            DialogueSystem.Instance.Play(offerShopDialogue);
+
+            firstTime = false;
+        }
+        else
+        {
+            shop.SetupShop();
+        }
+    }
+
+    public void EndInteraction()
+    {
+        InteractableManager.Instance.EndCurrentInteraction();
     }
 }

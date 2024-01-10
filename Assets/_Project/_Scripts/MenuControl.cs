@@ -5,7 +5,7 @@ using UnityEngine;
 public class MenuControl : MonoBehaviour
 {
     static MenuControl _current;
-    public static MenuControl Current;
+    public static MenuControl Current => _current;
 
     private RectTransform rectTransform;
 

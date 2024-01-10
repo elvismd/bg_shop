@@ -1,6 +1,8 @@
+using EMD;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -9,7 +11,9 @@ public class ItemUI : MonoBehaviour
 {
     [SerializeField] private Button button;
     [SerializeField] private Image image;
-    [SerializeField] private Item item;
+    [SerializeField] private TextMeshProUGUI descriptionLabel;
+    [SerializeField] private TextMeshProUGUI priceLabel;
+    [SerializeField, ReadOnly] private Item item;
 
     public void SetItem(Item targetItem, UnityAction onClickButton = null)
     {
@@ -29,6 +33,16 @@ public class ItemUI : MonoBehaviour
             image.gameObject.SetActive(true);
             item = targetItem;
             image.sprite = item.graphic;
+
+            if(descriptionLabel != null)
+            {
+                descriptionLabel.text = item.description;
+            }
+            if (priceLabel != null)
+            {
+                priceLabel.text = item.price.ToString();
+            }
         }
+
     }
 }

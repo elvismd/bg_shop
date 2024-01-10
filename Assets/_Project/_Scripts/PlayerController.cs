@@ -12,6 +12,7 @@ public class PlayerController : SingleInstance<PlayerController>
 
     public PlayerClothing Clothing => clothing;
 
+    [SerializeField]
     Vector2 movement;
     int direction;
 

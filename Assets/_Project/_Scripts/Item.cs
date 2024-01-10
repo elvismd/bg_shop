@@ -5,6 +5,8 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public Sprite graphic;
+    public string description;
+    public int price;
 
     public void Consume()
     {

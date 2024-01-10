@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -8,12 +9,18 @@ using UnityEngine.UI;
 
 public class Inventory : SingleInstance<Inventory>
 {
+    [SerializeField] private int currencyAmount = 50;
+    [SerializeField] private TextMeshProUGUI currencyLabel;
+
     [SerializeField] private List<ItemUI> itemsUI;
     [SerializeField] private List<Item> items;
     [SerializeField] private Image itemRefDraggable;
     [SerializeField] private Vector2 draggableOffset;
+    [SerializeField] private Transform itemsRoot;
+    [SerializeField] private Transform itemsParent;
 
     public Item DraggedItem => draggedItem;
+    public int CurrencyAmount => currencyAmount;
 
     Item draggedItem;
     bool dragging;
@@ -26,6 +33,8 @@ public class Inventory : SingleInstance<Inventory>
     }
     void Update()
     {
+        currencyLabel.text = currencyAmount.ToString();
+
         if (dragging)
         {
             itemRefDraggable.rectTransform.position = (Mouse.current.position.ReadValue()) + draggableOffset;
@@ -34,6 +43,34 @@ public class Inventory : SingleInstance<Inventory>
         {
             itemRefDraggable.rectTransform.anchoredPosition = Vector2.right * 6000;
         }
+    }
+
+    public bool ConsumeCurrency(int amount)
+    {
+        if (currencyAmount - amount < 0)
+        {
+            Debug.Log("Not enough coins");
+            return false;
+        }
+
+        currencyAmount -= amount;
+        return true;
+    }
+
+    public void AddCurrency(int amount)
+    {
+        currencyAmount += amount;
+    }
+
+    public void MoveItemsListTo(Transform parent)
+    {
+        itemsRoot.SetParent(parent);
+    }
+
+    public void ResetItemsList()
+    {
+        itemsRoot.SetParent(itemsParent);
+        itemsRoot.transform.SetAsFirstSibling();
     }
 
     public void DragItem(Item item)

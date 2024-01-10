@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphic: {fileID: -870591420, guid: e80e659478e6c4040ac5cbbdf21dde98, type: 3}
+  description: A special armor
+  price: 35
+  animator: {fileID: 22100000, guid: 902fac99c741b4e428d6bcf952c38af1, type: 2}
 --- !u!61 &8593397384043989174
 BoxCollider2D:
   m_ObjectHideFlags: 0
