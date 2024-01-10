@@ -18,6 +18,7 @@ public class Inventory : SingleInstance<Inventory>
     [SerializeField] private Vector2 draggableOffset;
     [SerializeField] private Transform itemsRoot;
     [SerializeField] private Transform itemsParent;
+    [SerializeField] private GameObject dropButton;
 
     public Item DraggedItem => draggedItem;
     public int CurrencyAmount => currencyAmount;
@@ -55,6 +56,8 @@ public class Inventory : SingleInstance<Inventory>
         {
             itemRefDraggable.rectTransform.anchoredPosition = Vector2.right * 6000;
         }
+
+        dropButton.SetActive(dragging);
     }
 
     public bool ConsumeCurrency(int amount)
@@ -83,6 +86,15 @@ public class Inventory : SingleInstance<Inventory>
     {
         itemsRoot.SetParent(itemsParent);
         itemsRoot.transform.SetAsFirstSibling();
+    }
+
+    public void DropCurrentItem()
+    {
+        var item = RetrieveDraggedItem();
+
+        item.transform.position = PlayerController.Instance.transform.position + Vector3.right * 1.2f;
+
+        item.gameObject.SetActive(true);
     }
 
     public void DragItem(Item item)
