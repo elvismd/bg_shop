@@ -32,7 +32,7 @@ public class ItemUI : MonoBehaviour
         {
             image.gameObject.SetActive(true);
             item = targetItem;
-            image.sprite = item.graphic;
+            image.sprite = item.graphicUI;
 
             if(descriptionLabel != null)
             {

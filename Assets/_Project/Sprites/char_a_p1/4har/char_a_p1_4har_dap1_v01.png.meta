@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -1482,11 +1482,11 @@ TextureImporter:
       down_walk_4: -2026180076
       char_a_p1_4har_dap1_v01_30: -2140207453
       char_a_p1_4har_dap1_v01_7: 281479973
-      char_a_p1_4har_dap1_v01_63: 1265212050
+      up_walk_0: 321689845
       char_a_p1_4har_dap1_v01_9: 250937882
       char_a_p1_4har_dap1_v01_22: 1133184861
-      up_walk_0: 321689845
       char_a_p1_4har_dap1_v01_17: 1307021508
+      char_a_p1_4har_dap1_v01_63: 1265212050
       char_a_p1_4har_dap1_v01_21: 804561673
       char_a_p1_4har_dap1_v01_29: -1030212357
       char_a_p1_4har_dap1_v01_11: -1684340204

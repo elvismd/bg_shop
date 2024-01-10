@@ -16,6 +16,7 @@ public class Shopkeeper : MonoBehaviour
         offerShopDialogue.onClickYes = () =>
         {
             shop.SetupShop();
+            firstTime = false;
         };
 
         offerShopDialogue.onClickNo = () =>
@@ -38,8 +39,6 @@ public class Shopkeeper : MonoBehaviour
             // Can call Play one after another, it enqueue each dialogue
             DialogueSystem.Instance.Play(welcomeDialogue);
             DialogueSystem.Instance.Play(offerShopDialogue);
-
-            firstTime = false;
         }
         else
         {

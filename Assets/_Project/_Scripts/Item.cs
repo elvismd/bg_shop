@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public Sprite graphic;
+    public Sprite graphicUI;
+    public Sprite graphicWear;
     public string description;
     public int price;
 

@@ -1,3 +1,4 @@
+using EMD;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,8 @@ public class PlayerClothing : MonoBehaviour
 {
     // use enum to set Cloth and Hat indexes?
 
-    [SerializeField] private ClothItem clothItem;
-    [SerializeField] private ClothItem hatItem;
+    [SerializeField, ReadOnly] private ClothItem clothItem;
+    [SerializeField, ReadOnly] private ClothItem hatItem;
 
     [SerializeField] private Animator clothAnimator;
     [SerializeField] private Animator hatAnimator;
@@ -27,34 +28,70 @@ public class PlayerClothing : MonoBehaviour
 
     private void Start()
     {
-        clothButtonUI.onClick.AddListener(() =>
+        clothButtonUI.onClick.AddListener(EquipClothItem);
+        hatButtonUI.onClick.AddListener(EquipHatItem);
+    }
+
+    void EquipClothItem()
+    {
+        if (clothItem == null)
         {
-            if (clothItem == null)
-            {
-                if (Inventory.Instance.DraggedItem != null && Inventory.Instance.DraggedItem.GetType() == typeof(ClothItem))
-                {
-                    EquipCloth(Inventory.Instance.RetrieveDraggedItem() as ClothItem);
-                }
-            }
-            else
-            {
-                Inventory.Instance.AddItem(clothItem);
-                Inventory.Instance.DragItem(clothItem);
+            EquipDraggedItem();
+        }
+        else
+        {
+            Inventory.Instance.AddItem(clothItem);
+            Inventory.Instance.DragItem(clothItem);
 
-                clothSlotUI.color = new Color(0.79f, 0.79f, 0.79f, 0.34f);
-                clothUI.color = Color.clear;
+            clothSlotUI.color = new Color(0.79f, 0.79f, 0.79f, 0.34f);
+            clothUI.color = Color.clear;
 
-                clothItem = null;
-                clothAnimator.runtimeAnimatorController = null;
+            clothItem = null;
+            clothAnimator.runtimeAnimatorController = null;
+        }
+    }
+
+    void EquipHatItem()
+    {
+        if (hatItem == null)
+        {
+            EquipDraggedItem();
+        }
+        else
+        {
+            Inventory.Instance.AddItem(hatItem);
+            Inventory.Instance.DragItem(hatItem);
+
+            hatSlotUI.color = new Color(0.79f, 0.79f, 0.79f, 0.34f);
+            hatUI.color = Color.clear;
+
+            hatItem = null;
+            hatAnimator.runtimeAnimatorController = null;
+        }
+    }
+
+    void EquipDraggedItem()
+    {
+        if (Inventory.Instance.DraggedItem != null && Inventory.Instance.DraggedItem.GetType() == typeof(ClothItem))
+        {
+            var item = Inventory.Instance.RetrieveDraggedItem() as ClothItem;
+            switch (item.type)
+            {
+                case ClothType.CLOTH:
+                    EquipCloth(item);
+                    break;
+                case ClothType.HAT:
+                    EquipHat(item);
+                    break;
             }
-        });
+        }
     }
 
     void EquipCloth(ClothItem cloth)
     {
         clothAnimator.runtimeAnimatorController = cloth.animator;
-        clothUI.sprite = cloth.graphic;
-        clothSlotUI.sprite = cloth.graphic;
+        clothUI.sprite = cloth.graphicWear;
+        clothSlotUI.sprite = cloth.graphicUI;
         clothItem = cloth;
 
         clothSlotUI.color = Color.white;
@@ -63,6 +100,12 @@ public class PlayerClothing : MonoBehaviour
 
     void EquipHat(ClothItem cloth)
     {
+        hatAnimator.runtimeAnimatorController = cloth.animator;
+        hatUI.sprite = cloth.graphicWear;
+        hatSlotUI.sprite = cloth.graphicUI;
+        hatItem = cloth;
 
+        hatSlotUI.color = Color.white;
+        hatUI.color = Color.white;
     }
 }

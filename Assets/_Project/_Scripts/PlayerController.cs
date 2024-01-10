@@ -12,7 +12,6 @@ public class PlayerController : SingleInstance<PlayerController>
 
     public PlayerClothing Clothing => clothing;
 
-    [SerializeField]
     Vector2 movement;
     int direction;
 
@@ -59,6 +58,12 @@ public class PlayerController : SingleInstance<PlayerController>
         {
             clothing.ClothAnimator.SetFloat("Speed", speed);
             clothing.ClothAnimator.SetFloat("Direction", direction);
+        }
+
+        if (clothing.HatAnimator.runtimeAnimatorController != null)
+        {
+            clothing.HatAnimator.SetFloat("Speed", speed);
+            clothing.HatAnimator.SetFloat("Direction", direction);
         }
     }
 }

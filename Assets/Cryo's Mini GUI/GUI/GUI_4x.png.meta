@@ -250,6 +250,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: GUI_4x_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 8, y: 8, z: 8, w: 8}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e90cd3ff518a0c4388e4d3d2838df53
+      internalID: -33082377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GUI_4x_8
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 35
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c73c327483f9c442815ef25bcd1fe58
+      internalID: 1490448575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -263,9 +305,11 @@ TextureImporter:
     nameFileIdTable:
       GUI_4x_6: -915009837
       GUI_4x_4: 1064926128
+      GUI_4x_7: -33082377
       GUI_4x_0: -161510981
       GUI_4x_1: 1659914682
       GUI_4x_3: -864957174
+      GUI_4x_8: 1490448575
       GUI_4x_5: -2035787436
       GUI_4x_2: -1545350215
   spritePackingTag: 

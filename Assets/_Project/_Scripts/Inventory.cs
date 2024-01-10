@@ -78,7 +78,7 @@ public class Inventory : SingleInstance<Inventory>
         if (item == null) return;
 
         draggedItem = item;
-        itemRefDraggable.sprite = item.graphic;
+        itemRefDraggable.sprite = item.graphicUI;
         dragging = true;
     }
 
@@ -93,7 +93,17 @@ public class Inventory : SingleInstance<Inventory>
 
     public void AddItem(Item item)
     {
-        if(nextIndex >= items.Count)
+        nextIndex = items.Count;
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] == null) //empty slot
+            {
+                nextIndex = i;
+                break;
+            }
+        }
+
+        if (nextIndex >= items.Count)
         {
             Debug.Log("Exceeded inventory slots");
             item.gameObject.SetActive(true);
@@ -101,7 +111,7 @@ public class Inventory : SingleInstance<Inventory>
             return;
         }
 
-        items[nextIndex++] = item;
+        items[nextIndex] = item;
 
         RefreshUI();
     }
@@ -115,9 +125,14 @@ public class Inventory : SingleInstance<Inventory>
 
         RefreshUI();
 
-        nextIndex--;
-        if (nextIndex < 0)
-            nextIndex = 0;
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] == null) //empty slot
+            {
+                nextIndex = i;
+                break;
+            }
+        }
 
         return itemToReturn;
     }
@@ -143,6 +158,8 @@ public class Inventory : SingleInstance<Inventory>
             itemUI.SetItem(item,
             () =>
                 {
+                    Debug.Log("Ref Index: " + referenceIndex);
+
                     if (!dragging)
                         DragItem(item);
                     else

@@ -9,6 +9,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private List<Item> items;
     [SerializeField] private List<ItemUI> itemsUI;
     [SerializeField] private Transform inventoryItemsParent;
+    [SerializeField] private GameObject sellButton;
 
     public MenuControl MenuControl => shopMenu;
 
@@ -24,7 +25,8 @@ public class Shop : MonoBehaviour
                 {
                     if(Inventory.Instance.ConsumeCurrency(item.price))
                     {
-                        Inventory.Instance.AddItem(item);
+                        var newBoughtItem = Instantiate(item); //TODO: Use cached version
+                        Inventory.Instance.AddItem(newBoughtItem);
                     }
                 });
             }
@@ -32,12 +34,23 @@ public class Shop : MonoBehaviour
         World.Instance.OnTogglePause += OnPause;
     }
 
+    private void Update()
+    {
+        if(shopMenu == MenuControl.Current)
+        {
+            sellButton.SetActive(Inventory.Instance.DraggedItem != null);
+        }
+    }
+
     public void OnClickSell()
     {
         if(Inventory.Instance.DraggedItem != null) 
         {
             var item = Inventory.Instance.RetrieveDraggedItem();
+
             Inventory.Instance.AddCurrency(item.price);
+
+            Destroy(item.gameObject); //TODO: Use cached version
         }
     }
      

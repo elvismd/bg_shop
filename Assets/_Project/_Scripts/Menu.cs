@@ -39,4 +39,9 @@ public class Menu : MonoBehaviour
             MenuControl.Current?.Close();
         }
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
