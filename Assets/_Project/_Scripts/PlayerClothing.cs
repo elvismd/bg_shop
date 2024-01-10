@@ -40,14 +40,24 @@ public class PlayerClothing : MonoBehaviour
         }
         else
         {
-            Inventory.Instance.AddItem(clothItem);
-            Inventory.Instance.DragItem(clothItem);
-
             clothSlotUI.color = new Color(0.79f, 0.79f, 0.79f, 0.34f);
             clothUI.color = Color.clear;
 
-            clothItem = null;
+           
             clothAnimator.runtimeAnimatorController = null;
+
+            var previousItem = clothItem;
+            Inventory.Instance.AddItem(clothItem);
+            if (Inventory.Instance.DraggedItem != null)
+            {
+                EquipDraggedItem();
+            }
+            else
+            {
+                clothItem = null;
+            }
+
+            Inventory.Instance.DragItem(previousItem);
         }
     }
 
@@ -59,14 +69,23 @@ public class PlayerClothing : MonoBehaviour
         }
         else
         {
-            Inventory.Instance.AddItem(hatItem);
-            Inventory.Instance.DragItem(hatItem);
-
             hatSlotUI.color = new Color(0.79f, 0.79f, 0.79f, 0.34f);
             hatUI.color = Color.clear;
 
-            hatItem = null;
             hatAnimator.runtimeAnimatorController = null;
+
+            var previousItem = hatItem;
+            Inventory.Instance.AddItem(hatItem);
+            if (Inventory.Instance.DraggedItem != null)
+            {
+                EquipDraggedItem();
+            }
+            else
+            {
+                hatItem = null;
+            }
+            
+            Inventory.Instance.DragItem(previousItem);
         }
     }
 
