@@ -41,6 +41,8 @@ public class GameManager : SingleInstance<GameManager>
 
         OnTogglePause?.Invoke(paused);
 
+        DialogueSystem.Instance.StopAndClear();
+        InteractableManager.Instance.EndCurrentInteraction();
         ResetCursorSprite();
     }
 

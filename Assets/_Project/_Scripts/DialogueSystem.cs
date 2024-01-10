@@ -111,6 +111,23 @@ public class DialogueSystem : SingleInstance<DialogueSystem>
         }
     }
 
+    public void StopAndClear()
+    {
+        if (!playing) return;
+
+        skip = true;
+        playing = false;
+        dialogueBox.SetActive(false);
+        nextButton.SetActive(false);
+
+        if(currentDialogue != null)
+            currentDialogue.onEnd?.Invoke();
+
+        //currentDialogue = null;
+        dialogues.Clear();
+
+    }
+
     public void Play(Dialogue dialogue) => dialogues.Enqueue(dialogue);
     
 }

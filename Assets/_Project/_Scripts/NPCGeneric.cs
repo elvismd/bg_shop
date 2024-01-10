@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NPCGeneric : MonoBehaviour
@@ -11,11 +12,11 @@ public class NPCGeneric : MonoBehaviour
         for (int i = 0; i < conversation.Length; i++)
         {
             DialogueSystem.Instance.Play(conversation[i]);
-
-            conversation[i].onEnd = () =>
-            {
-                InteractableManager.Instance.EndCurrentInteraction();
-            };
         }
+
+        conversation.Last().onEnd = () =>
+        {
+            InteractableManager.Instance.EndCurrentInteraction();
+        };
     }
 }
