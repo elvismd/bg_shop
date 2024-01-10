@@ -5,15 +5,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class Inventory : SingleInstance<Inventory>
 {
-    [SerializeField] private CanvasScaler canvasScaler;
     [SerializeField] private List<ItemUI> itemsUI;
     [SerializeField] private List<Item> items;
     [SerializeField] private Image itemRefDraggable;
     [SerializeField] private Vector2 draggableOffset;
+
+    public Item DraggedItem => draggedItem;
 
     Item draggedItem;
     bool dragging;
@@ -29,15 +29,6 @@ public class Inventory : SingleInstance<Inventory>
         if (dragging)
         {
             itemRefDraggable.rectTransform.position = (Mouse.current.position.ReadValue()) + draggableOffset;
-
-            //if (InputManager.Instance.Interact.WasPressedThisFrame())
-            //{
-            //    Debug.Log(EventSystem.current.currentSelectedGameObject);
-            //    if(itemsUI.FirstOrDefault(it => it.gameObject == EventSystem.current.currentSelectedGameObject) == null)
-            //    {
-            //        ReleaseItem();
-            //    }
-            //}
         }
         else
         {
@@ -45,7 +36,7 @@ public class Inventory : SingleInstance<Inventory>
         }
     }
 
-    void DragItem(Item item)
+    public void DragItem(Item item)
     {
         if (item == null) return;
 
@@ -65,10 +56,33 @@ public class Inventory : SingleInstance<Inventory>
 
     public void AddItem(Item item)
     {
-        //items.Add(item);
+        if(nextIndex >= items.Count)
+        {
+            Debug.Log("Exceeded inventory slots");
+            item.gameObject.SetActive(true);
+
+            return;
+        }
+
         items[nextIndex++] = item;
 
         RefreshUI();
+    }
+
+    public Item RetrieveDraggedItem()
+    {
+        Item itemToReturn = draggedItem;
+        ReleaseItem();
+
+        items[items.IndexOf(itemToReturn)] = null;
+
+        RefreshUI();
+
+        nextIndex--;
+        if (nextIndex < 0)
+            nextIndex = 0;
+
+        return itemToReturn;
     }
 
     public void RefreshUI()

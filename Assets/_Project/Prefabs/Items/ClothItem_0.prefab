@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphic: {fileID: -870591420, guid: 2c1e1c87856934a42890d43ea8d93d64, type: 3}
+  animator: {fileID: 22100000, guid: 781586d328f9739418dc56b564f04e55, type: 2}
 --- !u!61 &2798697176971566480
 BoxCollider2D:
   m_ObjectHideFlags: 0

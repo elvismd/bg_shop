@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ClothItem : Item
 {
-    
+    public RuntimeAnimatorController animator;
 }

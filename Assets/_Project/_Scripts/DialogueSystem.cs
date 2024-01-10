@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueSystem : SingleInstance<DialogueSystem>
 {
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private GameObject nextButton;
-    [SerializeField] private GameObject optionButton;
+    [SerializeField] private GameObject optionsButtons;
     [SerializeField] private TextMeshProUGUI dialogueText;
 
     Queue<Dialogue> dialogues = new Queue<Dialogue>();
@@ -21,6 +22,7 @@ public class DialogueSystem : SingleInstance<DialogueSystem>
     {
         nextButton.SetActive(false);
         dialogueBox.SetActive(false);
+        optionsButtons.SetActive(false);
     }
 
     void Update()
@@ -38,6 +40,8 @@ public class DialogueSystem : SingleInstance<DialogueSystem>
 
     IEnumerator PlayNextDialogue()
     {
+        optionsButtons.SetActive(false);
+
         skip = false;
         playing = true;
         dialogueText.text = "";
@@ -67,7 +71,28 @@ public class DialogueSystem : SingleInstance<DialogueSystem>
 
         nextButton.SetActive(true);
 
+        if(currentDialogue.onClickYes != null || currentDialogue.onClickNo != null)
+        {
+            optionsButtons.SetActive(true);
+        }
+
         yield return null;
+    }
+
+    public void OnClickYes()
+    {
+        if (currentDialogue != null && currentDialogue.onClickYes != null)
+            currentDialogue.onClickYes.Invoke();
+
+        Next();
+    }
+
+    public void OnClickNo()
+    {
+        if (currentDialogue != null && currentDialogue.onClickNo != null)
+            currentDialogue.onClickNo.Invoke();
+
+        Next();
     }
 
     public void Next()

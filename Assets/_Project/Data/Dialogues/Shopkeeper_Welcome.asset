@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0576b65938c0442915a23be87d6f8b, type: 3}
   m_Name: Shopkeeper_Welcome
   m_EditorClassIdentifier: 
-  message: Hey test interaction with a lot of text to play here and to test
-  options: []
+  message: Welcome to the shop! I hope you find something to your taste!
